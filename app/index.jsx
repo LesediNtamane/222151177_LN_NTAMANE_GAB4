@@ -13,6 +13,7 @@ const Index = () => {
   }
 
   return (
+    
     <SafeAreaView style={tw`flex-1 bg-slate-800`}>
       <Image source={{ uri: 'https://i.pinimg.com/564x/62/09/9e/62099e592621dce432115ccb8864edfd.jpg' }} resizeMode='cover' style={styles.img} />
       <View>

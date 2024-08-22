@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import useFormContext from '../hooks/useFormContext';
 import tw from 'twrnc';
 
+// defininig validationschema and validating inputs with Yup
+
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required.'),
   email: Yup.string().email('Invalid email address.').required('Email is required.'),

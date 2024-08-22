@@ -8,6 +8,7 @@ import tw from 'twrnc';
 const AddressDetails = () => {
   const { formData, handleInput, setPage } = useFormContext();
 
+// defininig addressschema and validating inputs with Yup
   const AddressSchema = Yup.object().shape({
     streetnumber: Yup.string().required("Street number is required."),
     city: Yup.string().required("City is required."),

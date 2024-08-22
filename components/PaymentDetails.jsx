@@ -8,6 +8,8 @@ import { router } from "expo-router";
 const PaymentDetails = () => {
   const { formData, handleInput, setPage } = useFormContext();
 
+  // defininig paymentschema and validating inputs with Yup
+
   const PaymentSchema = Yup.object().shape({
     cardnumber: Yup.string()
       .matches(/^\d+$/, 'Card number must be digits only.')

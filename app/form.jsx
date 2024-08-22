@@ -24,7 +24,7 @@ export default function Form() {
       </View>
 
 
-      {/* Display the current form title */}
+      {/* Display current form title */}
       <View style={styles.header}>
         <Text style={styles.headerText}>{FormTitles[page]}</Text>
       </View>
@@ -32,36 +32,19 @@ export default function Form() {
       <View style={tw`w-full top-20 h-100`}>{PageDisplay()}
 
 
-      <View style={tw`flex-row gap-x-10 items-center justify-center mb-10`}>
+      <View style={tw`flex-row gap-x-10 items-baseline`}>
 
       <Pressable
         disabled={page === 0}
         onPress={() => setPage((currPage) => currPage - 1)}
-        style={tw`w-1/4 h-10 rounded justify-center bg-emerald-500 ml-5`}
+        style={tw`w-1/4 h-10 rounded justify-center bg-black ml-5`}
       >
         <Text style={tw`font-medium text-white text-center`}>Prev</Text>
       </Pressable>
 
-      <Pressable
-        disabled={page === FormTitles.length - 1}
-        onPress={() => setPage((currPage) => currPage + 1)}
-        style={tw`w-1/4 h-10 rounded items-center justify-center bg-emerald-500 mr-5`}
-      >
-        <Text style={tw`font-medium text-white text-center`}>Next</Text>
-      </Pressable>
       </View>
 
-      {page === FormTitles.length - 1 && (
-        <View style={tw`items-center justify-center`}>
-          <Pressable
-            disabled={page !== FormTitles.length - 1}
-            onPress={handlesubmit}
-            style={tw`p-2 bg-black w-1/2 mb-5 p-3 h-10 justify-center rounded-sm mt-3`}
-          >
-            <Text style={tw`text-white text-center`}>Submit</Text>
-          </Pressable>
-        </View>
-      )}
+  
       </View>
     </SafeAreaView>
   );
@@ -69,13 +52,12 @@ export default function Form() {
 
 const styles = StyleSheet.create({
   container: {
-    // width: 'auto',
     height: 4,
     backgroundColor: 'white',
     marginBottom: -4,
     borderRadius: 1,
     overflow: 'hidden',
-    top:40,
+    top: 5,
 
   },
   progressBar: {

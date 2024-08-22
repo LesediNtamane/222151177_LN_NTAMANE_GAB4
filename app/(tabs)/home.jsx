@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Pressable, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, ScrollView,Alert } from 'react-native';
 import tw from 'twrnc';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SearchBar } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import EvilIcons from '@expo/vector-icons/EvilIcons';
 
 // Sample data for food items
@@ -32,6 +33,28 @@ export default function App() {
     );
     setFiltered(searchResults.length > 0 ? searchResults : []);
   }, [search]);
+  
+//  show an alert when user clicks the add button
+  const handleAddToCart = (item) => {
+    Alert.alert(
+      "Item Added to Cart",
+      `You have added ${item.description} to your cart.`,
+      [
+        {
+          text: "Go to Cart",
+          onPress: () => {
+            router.push('cart')
+          },
+        },
+        {
+          text: "OK",
+          onPress: () => console.log("OK Pressed"),
+        },
+      ]
+    );
+  };
+  const router = useRouter();
+
 
   return (
     <SafeAreaView style={tw`flex-1`}>
@@ -56,17 +79,17 @@ export default function App() {
             placeholderTextColor='gray'
           />
         </View>
-        <View style={tw`flex-row justify-between p-2 items-center justify-center mt-10`}>
+        <View style={tw`flex-row p-1 items-center justify-center mt-10`}>
           <ScrollView showsHorizontalScrollIndicator={true} horizontal={true}>
-          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 mix-blend-difference`}>
+          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
             <Image source={{uri:'https://i.pinimg.com/736x/36/92/d7/3692d7ddaf5af752d738b6919797c5d8.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
             <Text style={tw`text-black font-bold absolute opacity-100 `}>Promos</Text>
           </View>
-          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 mix-blend-difference`}>
+          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
           <Image source={{uri:'https://i.pinimg.com/564x/51/52/9c/51529c6765474c4765754f9dd6b11a25.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
             <Text style={tw`text-black font-bold absolute opacity-100 `}>Nearby Restaurants</Text>
           </View>
-          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 mix-blend-difference`}>
+          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
           <Image source={{uri:'https://i.pinimg.com/564x/fa/ac/d4/faacd4ced1ca64eccc42f93007262f19.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
             <Text style={tw`text-black font-bold absolute opacity-100`}>Delivery</Text>
           </View>
@@ -78,7 +101,9 @@ export default function App() {
               <Image source={{ uri: item.image }} resizeMode='cover' style={styles.img} />
               <Text>{item.description}</Text>
               <Text>{item.price}</Text>
-              <Pressable>{item.cart}</Pressable>
+              <Pressable onPress={() => handleAddToCart(item)}>
+                {item.cart}
+              </Pressable>
             </View>
           ))}
         </View>
