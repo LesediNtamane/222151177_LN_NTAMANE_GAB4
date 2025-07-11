@@ -43,6 +43,7 @@ const PaymentDetails = () => {
           <TextInput
             style={styles.input}
             placeholder="Card Number"
+            placeholderTextColor= "grey"
             onChangeText={handleChange("cardnumber")}
             onBlur={handleBlur("cardnumber")}
             value={values.cardnumber}
@@ -53,6 +54,7 @@ const PaymentDetails = () => {
           <TextInput
             style={styles.input}
             placeholder="Expiration Date (MM/YY)"
+            placeholderTextColor= "grey"
             onChangeText={handleChange("expiration")}
             onBlur={handleBlur("expiration")}
             value={values.expiration}
@@ -62,6 +64,7 @@ const PaymentDetails = () => {
           <TextInput
             style={styles.input}
             placeholder="CVV"
+            placeholderTextColor= "grey"
             onChangeText={handleChange("cvv")}
             onBlur={handleBlur("cvv")}
             value={values.cvv}

@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     fontFamily:'Bitter_400Regular',
     fontSize:25,
     marginLeft:5,
+    marginTop: 20,
+    textAlign: 'center',
   }
 })
 

@@ -17,7 +17,7 @@ const Index = () => {
     <SafeAreaView style={tw`flex-1 bg-slate-800`}>
       <Image source={{ uri: 'https://i.pinimg.com/564x/62/09/9e/62099e592621dce432115ccb8864edfd.jpg' }} resizeMode='cover' style={styles.img} />
       <View>
-        <Text style={[tw`w-55 text-emerald-700 top-20 ml-8`, styles.Header]}>What's on your plate today?</Text>
+        <Text style={[tw`w-55 text-white top-20 ml-8`, styles.Header]}>What's for dinner?</Text>
       </View>
       <View style={tw`flex-1 mt-70 justify-center items-center`}>
         <BlurView intensity={500} style={styles.blurContainer}>

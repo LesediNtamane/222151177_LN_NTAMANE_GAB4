@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'black',
   },
-  formContainer: {},
+  // formContainer: {
+  //   color: 'black',
+  // },
 
   header: {
     justifyContent:'center',

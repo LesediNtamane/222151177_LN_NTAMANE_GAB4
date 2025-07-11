@@ -33,7 +33,8 @@ const UserDetailsForm = () => {
         <View style={styles.container}>
           <TextInput
             style={styles.input}
-            placeholder="Name"
+            placeholder="Enter name"
+            placeholderTextColor='grey'
             onChangeText={handleChange('name')}
             onBlur={handleBlur('name')}
             value={values.name}
@@ -42,7 +43,8 @@ const UserDetailsForm = () => {
 
           <TextInput
             style={styles.input}
-            placeholder="Email"
+            placeholder="Enter email"
+            placeholderTextColor='grey'
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             value={values.email}
@@ -51,7 +53,8 @@ const UserDetailsForm = () => {
 
           <TextInput
             style={styles.input}
-            placeholder="Cell Number"
+            placeholder="Enter cell number"
+            placeholderTextColor='grey'
             keyboardType="numeric" 
             onChangeText={handleChange('cellnumber')}
             onBlur={handleBlur('cellnumber')}

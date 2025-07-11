@@ -22,7 +22,7 @@ export default function ProfileTab() {
         style={{ flexGrow: 1 }}
         contentInsetAdjustmentBehavior="always"
       >
-        <View style={[tw`flex-col gap-6`, { paddingBottom: 20 }]}>
+        <View style={[tw`flex-col gap-6`, { paddingBottom: 20,alignItems: 'center' }]}>
           <Text style={[styles.Header, { color: isDarkMode ? '#ffffff' : '#000000' }]}>Profile</Text>
 
           <View style={[tw`w-80 justify-center ${isDarkMode ? 'bg-gray-800' : 'bg-indigo-50'} rounded p-4 items-center`]}>
@@ -69,5 +69,7 @@ const styles = StyleSheet.create({
   Header: {
     fontFamily: 'Bitter_400Regular',
     fontSize: 25,
+    marginTop: 20,
+    textAlign: 'center',
   },
 });

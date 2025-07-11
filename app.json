@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "222151177_LN_NTAMANE_GAB4",
-    "slug": "222151177_LN_NTAMANE_GAB4",
+    "name": "menU",
+    "slug": "menU",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,8 +9,8 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#00000"
     },
     "ios": {
       "supportsTablet": true

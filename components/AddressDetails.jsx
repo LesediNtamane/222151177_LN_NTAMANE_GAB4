@@ -12,7 +12,7 @@ const AddressDetails = () => {
   const AddressSchema = Yup.object().shape({
     streetnumber: Yup.string().required("Street number is required."),
     city: Yup.string().required("City is required."),
-    state: Yup.string().required("State is required."),
+    province: Yup.string().required("Province is required."),
     zipcode: Yup.string().required("Zip code is required.")
   });
 
@@ -21,14 +21,14 @@ const AddressDetails = () => {
       initialValues={{
         streetnumber: formData.streetnumber || "",
         city: formData.city || "",
-        state: formData.state || "",
+        province: formData.province || "",
         zipcode: formData.zipcode || ""
       }}
       validationSchema={AddressSchema}
       onSubmit={(values) => {
         handleInput('streetnumber', values.streetnumber);
         handleInput('city', values.city);
-        handleInput('state', values.state);
+        handleInput('province', values.province);
         handleInput('zipcode', values.zipcode);
         setPage(2); 
       }}
@@ -37,7 +37,8 @@ const AddressDetails = () => {
         <View style={styles.container}>
           <TextInput
             style={styles.input}
-            placeholder="Street Number"
+            placeholder="Enter street number"
+            placeholderTextColor='grey'
             onChangeText={handleChange("streetnumber")}
             onBlur={handleBlur("streetnumber")}
             value={values.streetnumber}
@@ -46,7 +47,8 @@ const AddressDetails = () => {
 
           <TextInput
             style={styles.input}
-            placeholder="City"
+            placeholder="Enter city"
+            placeholderTextColor='grey'
             onChangeText={handleChange("city")}
             onBlur={handleBlur("city")}
             value={values.city}
@@ -55,16 +57,18 @@ const AddressDetails = () => {
 
           <TextInput
             style={styles.input}
-            placeholder="State"
-            onChangeText={handleChange("state")}
-            onBlur={handleBlur("state")}
-            value={values.state}
+            placeholder="Enter province"
+            placeholderTextColor='grey' 
+            onChangeText={handleChange("province")}
+            onBlur={handleBlur("province")}
+            value={values.province}
           />
-          {touched.state && errors.state && <Text style={styles.error}>{errors.state}</Text>}
+          {touched.province && errors.province && <Text style={styles.error}>{errors.province}</Text>}
 
           <TextInput
             style={styles.input}
-            placeholder="Zip Code"
+            placeholder="Enter zip code"
+            placeholderTextColor='grey'
             onChangeText={handleChange("zipcode")}
             onBlur={handleBlur("zipcode")}
             value={values.zipcode}
