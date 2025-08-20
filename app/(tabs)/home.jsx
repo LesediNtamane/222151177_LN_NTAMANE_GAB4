@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTheme } from '@react-navigation/native';
 import { View, Text, StyleSheet, Image, Pressable, ScrollView,Alert } from 'react-native';
 import tw from 'twrnc';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -24,8 +25,11 @@ const foodItems = [
 ];
 
 export default function App() {
+  const { colors } = useTheme();
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState(foodItems);
+  const [cart, setCart] = useState([]); // Cart state
+  const router = useRouter();
 
   useEffect(() => {
     const searchResults = foodItems.filter((f) =>
@@ -33,40 +37,61 @@ export default function App() {
     );
     setFiltered(searchResults.length > 0 ? searchResults : []);
   }, [search]);
-  
-//  show an alert when user clicks the add button
+
   const handleAddToCart = (item) => {
-    Alert.alert(
-      "Item Added to Cart",
-      `You have added ${item.description} to your cart.`,
-      [
-        {
-          text: "Go to Cart",
-          onPress: () => {
-            router.push('cart')
+    const { id, description, price, image } = item;
+    setCart((prevCart) => {
+      const exists = prevCart.find((i) => i.id === id);
+      if (exists) {
+        Alert.alert("Already in Cart", `${description} is already in your cart.`);
+        return prevCart;
+      }
+      const newCart = [...prevCart, { id, description, price, image }];
+      Alert.alert(
+        "Item Added to Cart",
+        `You have added ${description} to your cart.`,
+        [
+          {
+            text: "Go to Cart",
+            onPress: () => {
+              router.push({ pathname: 'cart', params: { cart: JSON.stringify(newCart) } });
+            },
           },
-        },
-        {
-          text: "OK",
-          onPress: () => console.log("OK Pressed"),
-        },
-      ]
-    );
+          {
+            text: "OK",
+            onPress: () => {},
+          },
+        ]
+      );
+      return newCart;
+    });
   };
-  const router = useRouter();
 
 
   return (
-    <SafeAreaView style={tw`flex-1`}>
-      <ScrollView>
+  <SafeAreaView style={[tw`flex-1`, { backgroundColor: colors.background }]}>
+  <ScrollView style={{ backgroundColor: colors.background }}>
+        {/* Cart count display */}
+        <View style={tw`flex-row justify-end items-center p-2`}>
+          <Pressable onPress={() => {
+            // Only pass serializable cart data
+            const serializableCart = cart.map(({ id, description, price, image }) => ({ id, description, price, image }));
+            router.push({ pathname: 'cart', params: { cart: JSON.stringify(serializableCart) } });
+          }}>
+            <Ionicons name="cart" size={28} color="black" />
+            {cart.length > 0 && (
+              <Text style={tw`absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 text-xs`}>
+                {cart.length}
+              </Text>
+            )}
+          </Pressable>
+        </View>
+        {/* ...existing code... */}
         <View style={tw`font-medium top-10 flex-row items-center ml-1`}>
-
-
-          <Pressable><Ionicons name="location" size={24} color="black" /></Pressable>
-
-          <Text>Confirm delivery Address</Text>
-          </View>
-          <View style={tw`relative `} ><Pressable style={tw`items-center `} ><EvilIcons style={tw`top-4 mr-3 right-0 absolute`} name="navicon" size={24} color="black" /></Pressable></View>
+          <Pressable><Ionicons name="location" size={24} color={colors.text} /></Pressable>
+          <Text style={{ color: colors.text }}>Confirm delivery Address</Text>
+        </View>
+        <View style={tw`relative `} ><Pressable style={tw`items-center `} ><EvilIcons style={tw`top-4 mr-3 right-0 absolute`} name="navicon" size={24} color="black" /></Pressable></View>
 
         <View style={tw`items-center justify-center mt-20`}>
           <SearchBar
@@ -81,26 +106,26 @@ export default function App() {
         </View>
         <View style={tw`flex-row p-1 items-center justify-center mt-10`}>
           <ScrollView showsHorizontalScrollIndicator={true} horizontal={true}>
-          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
-            <Image source={{uri:'https://i.pinimg.com/736x/36/92/d7/3692d7ddaf5af752d738b6919797c5d8.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
-            <Text style={tw`text-black font-bold absolute opacity-100 `}>Promos</Text>
-          </View>
-          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
-          <Image source={{uri:'https://i.pinimg.com/564x/51/52/9c/51529c6765474c4765754f9dd6b11a25.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
-            <Text style={tw`text-black font-bold absolute opacity-100 `}>Nearby Restaurants</Text>
-          </View>
-          <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
-          <Image source={{uri:'https://i.pinimg.com/564x/fa/ac/d4/faacd4ced1ca64eccc42f93007262f19.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
-            <Text style={tw`text-black font-bold absolute opacity-100`}>Delivery</Text>
-          </View>
+            <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
+              <Image source={{uri:'https://i.pinimg.com/736x/36/92/d7/3692d7ddaf5af752d738b6919797c5d8.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
+              <Text style={tw`text-black font-bold absolute opacity-100 `}>Promos</Text>
+            </View>
+            <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
+              <Image source={{uri:'https://i.pinimg.com/564x/51/52/9c/51529c6765474c4765754f9dd6b11a25.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
+              <Text style={tw`text-black font-bold absolute opacity-100 `}>Nearby Restaurants</Text>
+            </View>
+            <View style={tw`w-60 h-30 rounded-md bg-black items-center justify-center opacity-95 `}>
+              <Image source={{uri:'https://i.pinimg.com/564x/fa/ac/d4/faacd4ced1ca64eccc42f93007262f19.jpg'}} resizeMode='conatin' style={tw`w-full h-full rounded-md`} />
+              <Text style={tw`text-black font-bold absolute opacity-100`}>Delivery</Text>
+            </View>
           </ScrollView>
         </View>
         <View style={tw`flex-row flex-wrap items-center justify-center mt-5`}>
           {filtered.map(item => (
             <View key={item.id} style={tw`w-1/2 p-5`}>
               <Image source={{ uri: item.image }} resizeMode='cover' style={styles.img} />
-              <Text>{item.description}</Text>
-              <Text>{item.price}</Text>
+              <Text style={{ color: colors.text }}>{item.description}</Text>
+              <Text style={{ color: colors.text }}>{item.price}</Text>
               <Pressable onPress={() => handleAddToCart(item)}>
                 {item.cart}
               </Pressable>

@@ -27,7 +27,7 @@ export default function RootLayout() {
       {/* <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}> */}
         <Stack initialRouteName='index'>
           <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false, headerBackTitle: 'back' }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, headerBackTitle: 'back', headerBackTitleStyle: { display: 'none' } }} />
           <Stack.Screen name="form" options={{ headerShown: false }} />
         </Stack>
       {/* </ThemeProvider> */}
